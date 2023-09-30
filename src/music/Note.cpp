@@ -2,8 +2,7 @@
 
 namespace music {
 
-  Note::Note(const String& name, double frequency)
-    : name(name), frequency(frequency) {}
+  Note::Note(String name, double frequency) : name(name), frequency(frequency) {}
 
   String Note::getName() const {
     return name;

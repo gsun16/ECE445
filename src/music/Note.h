@@ -7,13 +7,15 @@ namespace music {
 
   class Note {
     public:
-      Note(const String& name, double frequency);
+      Note(String name, double frequency);
+
       String getName() const;
       double getFrequency() const;
+    
     private:
       String name;
       double frequency;
-    };
+  };
 
 }
 

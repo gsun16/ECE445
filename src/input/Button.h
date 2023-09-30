@@ -1,22 +1,22 @@
-#ifndef INPUT_BUTTON_H
-#define INPUT_BUTTON_H
+#ifndef BUTTON_H
+#define BUTTON_H
 
 #include <Arduino.h>
+#include "Switch.h"
 
 namespace input {
 
-  class Button {
-
+  class Button : public Switch {
     public:
-        Button(int pin);
-        bool isPressed();
+      Button(int pin);
+
+      void begin() override;
+      void update() override;
 
     private:
-        int pin;
-        bool currentState;
-        bool previousState;
-    };
+      int pin;
+  };
 
-}
+} // namespace input
 
-#endif
+#endif // BUTTON_H

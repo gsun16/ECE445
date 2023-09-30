@@ -2,17 +2,20 @@
 
 namespace input {
 
-  Button::Button(int pin) : pin(pin), currentState(false), previousState(false) {
-    pinMode(pin, INPUT_PULLUP);
-  }
+Button::Button(int pin) : Switch(), pin(pin) {}
 
-  bool Button::isPressed() {
-    currentState = digitalRead(pin);
-    if (currentState != previousState) {
-      previousState = currentState;
-      return currentState == LOW;
-    }
-    return false;
+void Button::begin() {
+  pinMode(pin, INPUT);
+}
+
+void Button::update() {
+  bool isNewStatePressed = digitalRead(pin);
+
+  if (isPressed() && !isNewStatePressed) {
+    release();
+  } else if (isReleased() && isNewStatePressed) {
+    press();
   }
+}
 
 }
