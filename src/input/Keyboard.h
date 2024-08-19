@@ -1,18 +1,28 @@
 #ifndef KEYBOARD_H
 #define KEYBOARD_H
 
-#include "../InputChannel.h"
+#include <Arduino.h>
+#include <Keypad.h>
+#include "Input.h"
 
-namespace input {
-  namespace keyboard {
+class Keyboard : public Input {
+protected:
+    Keypad* keypad;
 
-    class Keyboard : public InputChannel {
-      public:
-        Keyboard();
-        void read() override = 0;
-    };
+    Keyboard();
+    virtual ~Keyboard();
 
-  }
-}
+    virtual byte getRows() const = 0;
+    virtual byte getCols() const = 0;
+    virtual char* getKeymap() const = 0;
+    virtual byte* getRowPins() const = 0;
+    virtual byte* getColPins() const = 0;
+    virtual Sound** getKeySoundMap() const = 0;
+
+    void initializeKeypad();
+
+public:
+    Sound* read() override;
+};
 
 #endif // KEYBOARD_H

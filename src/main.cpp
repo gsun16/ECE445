@@ -1,18 +1,23 @@
 #include <Arduino.h>
+#include "Accordion.h"
+#include "PianoKeyboard.h"
+#include "ConsoleOutput.h"
 
-// put function declarations here:
-int myFunction(int, int);
+Accordion* accordion;
 
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+    Serial.begin(115200);
+
+    // Set up PianoKeyboard
+    PianoKeyboard* piano = new PianoKeyboard();
+    
+    // Set up ConsoleOutput
+    ConsoleOutput* consoleOutput = new ConsoleOutput();
+
+    // Initialize the accordion with single input/output
+    accordion = new Accordion(piano, consoleOutput);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+    accordion->play();
 }

@@ -1,22 +1,20 @@
-#ifndef MUSIC_NOTE_H
-#define MUSIC_NOTE_H
+#ifndef NOTE_H
+#define NOTE_H
 
 #include <Arduino.h>
+#include "Sound.h"
 
-namespace music {
+class Note : public Sound {
+private:
+    String name;
+    int frequency;
 
-  class Note {
-    public:
-      Note(String name, double frequency);
+public:
+    Note(const String& name, int frequency);
+    ~Note() = default;
 
-      String getName() const;
-      double getFrequency() const;
-    
-    private:
-      String name;
-      double frequency;
-  };
+    String getName() const;
+    int getFrequency() const;
+};
 
-}
-
-#endif // MUSIC_NOTE_H
+#endif // NOTE_H

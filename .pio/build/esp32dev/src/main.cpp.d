@@ -130,4 +130,12 @@
  /Users/brunocampidelli/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/spi_flash/include/esp_spi_flash_counters.h \
  /Users/brunocampidelli/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_hw_support/include/soc/esp32/spiram.h \
  /Users/brunocampidelli/.platformio/packages/framework-arduinoespressif32/cores/esp32/io_pin_remap.h \
- /Users/brunocampidelli/.platformio/packages/framework-arduinoespressif32/cores/esp32/Arduino.h
+ /Users/brunocampidelli/.platformio/packages/framework-arduinoespressif32/cores/esp32/Arduino.h \
+ src/instrument/accordion/Accordion.h \
+ src/instrument/accordion/PianoKeyboard.h \
+ .pio/libdeps/esp32dev/Keypad/src/Keypad.h \
+ .pio/libdeps/esp32dev/Keypad/src/Key.h src/input/Keyboard.h \
+ src/input/Input.h src/music/Sound.h src/music/Note.h src/music/Sound.h \
+ src/output/Output.h src/instrument/accordion/PianoKeyboard.h \
+ src/output/ConsoleOutput.h src/output/Output.h src/music/Chord.h \
+ src/music/Note.h

@@ -1,15 +1,11 @@
 #include "Note.h"
 
-namespace music {
+Note::Note(const String& name, int frequency) : Sound(Sound::Type::NOTE), name(name), frequency(frequency) {}
 
-  Note::Note(String name, double frequency) : name(name), frequency(frequency) {}
-
-  String Note::getName() const {
+String Note::getName() const {
     return name;
-  }
+}
 
-  double Note::getFrequency() const {
+int Note::getFrequency() const {
     return frequency;
-  }
-
 }
