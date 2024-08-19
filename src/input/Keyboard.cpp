@@ -1,29 +1,26 @@
 #include "Keyboard.h"
 
-Keyboard::Keyboard() : keypad(nullptr) {
-    // Constructor is empty, initialization is deferred
-}
-
-Keyboard::~Keyboard() {
-    delete keypad;
-}
-
-void Keyboard::initializeKeypad() {
-    keypad = new Keypad(makeKeymap(getKeymap()), getRowPins(), getColPins(), getRows(), getCols());
+Keyboard::Keyboard(byte rows, byte cols, char* keymap, byte* rowPins, byte* colPins, std::map<char, Sound*> keySoundMap)
+    : keypad(Keypad(makeKeymap(keymap), rowPins, colPins, rows, cols)), keySoundMap(keySoundMap) {
 }
 
 Sound* Keyboard::read() {
-    if (keypad->getKeys()) {
+    if (keypad.getKeys()) { 
         for (int i = 0; i < LIST_MAX; i++) {
-            if (keypad->key[i].stateChanged) {
-                char key = keypad->key[i].kchar;
-                Sound** soundMap = getKeySoundMap();
-                Sound* sound = soundMap[static_cast<unsigned char>(key)];
+            if (keypad.key[i].stateChanged) {
+                char key = keypad.key[i].kchar;
+                KeyState state = keypad.key[i].kstate;
+
+                auto it = keySoundMap.find(key);
+                Sound* sound = (it != keySoundMap.end()) ? it->second : nullptr;
+
                 if (sound) {
-                    if (keypad->key[i].kstate == PRESSED) {
+                    if (state == PRESSED) {
                         sound->start();
+                    } else if (state == RELEASED) {
+                        sound->stop();  
                     } else {
-                        sound->stop();
+                        return nullptr;
                     }
                     return sound;
                 }

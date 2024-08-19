@@ -28,7 +28,6 @@ void ConsoleOutput::write(Sound* sound) {
     }
 }
 
-// Private method to print note details
 void ConsoleOutput::printNoteDetails(Note* note, const String& action) {
     Serial.print(action);
     Serial.print(" Note: Name = ");
@@ -37,19 +36,19 @@ void ConsoleOutput::printNoteDetails(Note* note, const String& action) {
     Serial.println(note->getFrequency());
 }
 
-// Private method to print chord details
 void ConsoleOutput::printChordDetails(Chord* chord, const String& action) {
     Serial.print(action);
     Serial.print(" Chord: Name = ");
     Serial.println(chord->getName());
     Serial.println("Notes in the chord:");
-    Note** notes = chord->getNotes();
-    for (int i = 0; i < chord->getNoteCount(); ++i) {
-        if (notes[i] != nullptr) {
+    
+    const std::vector<Note*>& notes = chord->getNotes();
+    for (const Note* note : notes) {
+        if (note != nullptr) {
             Serial.print(" - ");
-            Serial.print(notes[i]->getName());
+            Serial.print(note->getName());
             Serial.print(" with frequency: ");
-            Serial.println(notes[i]->getFrequency());
+            Serial.println(note->getFrequency());
         }
     }
 }

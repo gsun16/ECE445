@@ -2,23 +2,20 @@
 #define CHORD_H
 
 #include <Arduino.h>
+#include <vector>
 #include "Sound.h"
 #include "Note.h"
 
 class Chord : public Sound {
 private:
-    static const int MAX_NOTES = 4;
-    String name;
-    Note* notes[MAX_NOTES];
-    int noteCount;
+    std::vector<Note*> notes;
 
 public:
-    Chord(const String& name, Note* notesArray[], int count);
-    ~Chord() = default;
+    Chord(String name, std::vector<Note*> notes);
+    ~Chord();
 
-    String getName() const;
     int getNoteCount() const;
-    Note** getNotes();
+    const std::vector<Note*>& getNotes() const;
 };
 
 #endif // CHORD_H

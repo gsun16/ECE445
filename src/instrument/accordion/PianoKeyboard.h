@@ -17,20 +17,9 @@ private:
     byte rowPins[ROWS] = {22, 23};
     byte colPins[COLS] = {25, 26};
 
-    static const int KEYBOARD_SIZE = ROWS * COLS;
-    Sound* keySoundMap[KEYBOARD_SIZE] = {nullptr}; // Initialize the array to map the keys to sounds (notes or chords)
-
-protected:
-    byte getRows() const override;
-    byte getCols() const override;
-    char* getKeymap() const override;
-    byte* getRowPins() const override;
-    byte* getColPins() const override;
-    Sound** getKeySoundMap() const override;
-
 public:
     PianoKeyboard();
-    ~PianoKeyboard() override;
+    ~PianoKeyboard();
 };
 
 #endif // PIANOKEYBOARD_H

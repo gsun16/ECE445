@@ -6,14 +6,11 @@
 
 class Note : public Sound {
 private:
-    String name;
     int frequency;
 
 public:
-    Note(const String& name, int frequency);
-    ~Note() = default;
+    Note(String name, int frequency);
 
-    String getName() const;
     int getFrequency() const;
 };
 

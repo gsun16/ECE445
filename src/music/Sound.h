@@ -11,11 +11,12 @@ public:
     };
 
 private:
-    Type soundType;
+    Type type;
+    String name;
     bool playing;
     
 public:
-    Sound(Type type);
+    Sound(Type type, String name);
     virtual ~Sound() = default;
 
     bool isPlaying() const;
@@ -23,6 +24,7 @@ public:
     void stop();
 
     Type getType() const;
+    String getName() const;
 };
 
 #endif // SOUND_H

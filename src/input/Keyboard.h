@@ -3,23 +3,15 @@
 
 #include <Arduino.h>
 #include <Keypad.h>
+#include <map>
 #include "Input.h"
 
 class Keyboard : public Input {
 protected:
-    Keypad* keypad;
+    Keypad keypad;
+    std::map<char, Sound*> keySoundMap;
 
-    Keyboard();
-    virtual ~Keyboard();
-
-    virtual byte getRows() const = 0;
-    virtual byte getCols() const = 0;
-    virtual char* getKeymap() const = 0;
-    virtual byte* getRowPins() const = 0;
-    virtual byte* getColPins() const = 0;
-    virtual Sound** getKeySoundMap() const = 0;
-
-    void initializeKeypad();
+    Keyboard(byte rows, byte cols, char* keymap, byte* rowPins, byte* colPins, std::map<char, Sound*> keySoundMap);
 
 public:
     Sound* read() override;

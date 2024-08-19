@@ -1,26 +1,18 @@
 #include "Chord.h"
 
-Chord::Chord(const String& name, Note* notesArray[], int count) : Sound(Sound::Type::CHORD), name(name),  noteCount(noteCount) {
-    if (noteCount > MAX_NOTES) {
-        noteCount = MAX_NOTES;
-    }
-    for (int i = 0; i < noteCount; ++i) {
-        notes[i] = notesArray[i];
-    }
-    for (int i = noteCount; i < MAX_NOTES; ++i) {
-        notes[i] = nullptr;
-    }
+Chord::Chord(String name, std::vector<Note*> notesVector)
+    : Sound(Sound::Type::CHORD, name), notes(notesVector) {
 }
 
-String Chord::getName() const {
-    return name;
+Chord::~Chord() {
+    // Optionally, if you need to free Note objects created elsewhere, do it here.
+    // For example: delete notes[i]; but be cautious with ownership semantics.
 }
 
 int Chord::getNoteCount() const {
-    return noteCount;
+    return notes.size();
 }
 
-Note** Chord::getNotes() {
+const std::vector<Note*>& Chord::getNotes() const {
     return notes;
 }
-

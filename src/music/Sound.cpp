@@ -1,6 +1,6 @@
 #include "Sound.h"
 
-Sound::Sound(Type type) : soundType(type), playing(false) {}
+Sound::Sound(Type type, String name) : type(type), name(name), playing(false) {}
 
 bool Sound::isPlaying() const {
     return playing;
@@ -15,5 +15,9 @@ void Sound::stop() {
 }
 
 Sound::Type Sound::getType() const {
-    return soundType;
+    return type;
+}
+
+String Sound::getName() const {
+    return name;
 }
