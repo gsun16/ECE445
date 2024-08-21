@@ -136,5 +136,4 @@
  src/instrument/accordion/PianoKeyboard.h \
  .pio/libdeps/esp32dev/Keypad/src/Keypad.h \
  .pio/libdeps/esp32dev/Keypad/src/Key.h src/input/Keyboard.h \
- src/input/Input.h src/music/Sound.h src/music/Note.h src/music/Sound.h \
- src/output/Output.h
+ src/input/Input.h src/music/Sound.h src/music/Note.h src/output/Output.h

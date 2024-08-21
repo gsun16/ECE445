@@ -6,7 +6,7 @@
 Accordion* accordion;
 
 void setup() {
-    Serial.begin(9600);
+    Serial.begin(115200);
 
     PianoKeyboard* piano = new PianoKeyboard();
     ConsoleOutput* consoleOutput = new ConsoleOutput();

@@ -6,7 +6,7 @@
 
 class Input {
 public:
-    virtual Sound* read() = 0;
+    virtual const Sound* read() = 0;
 };
 
 #endif // INPUT_H

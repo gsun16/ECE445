@@ -11,11 +11,11 @@ private:
     static const byte ROWS = 2;
     static const byte COLS = 2;
     char keys[ROWS][COLS] = {
-        {'1', '2'},
-        {'3', '4'}
+        {Note::C_4.getId(), Note::D_4.getId()},
+        {Note::E_4.getId(), Note::F_4.getId()}
     };
-    byte rowPins[ROWS] = {22, 23};
-    byte colPins[COLS] = {25, 26};
+    byte rowPins[ROWS] = {14, 12};
+    byte colPins[COLS] = {32, 33};
 
 public:
     PianoKeyboard();

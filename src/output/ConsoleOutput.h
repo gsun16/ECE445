@@ -11,8 +11,9 @@ public:
     void write(Sound* sound) override;
 
 private:
-    void printNoteDetails(Note* note, const String& action);
-    void printChordDetails(Chord* chord, const String& action);
+    void printSoundDetails(Sound* sound);
+    void printNoteDetails(Note* note);
+    void printChordDetails(Chord* chord);
 };
 
 #endif // CONSOLEOUTPUT_H

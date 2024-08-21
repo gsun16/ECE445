@@ -5,26 +5,26 @@
 
 class Sound {
 public:
-    enum class Type {
+    enum Type {
         NOTE,
         CHORD
     };
 
-private:
-    Type type;
-    String name;
-    bool playing;
-    
-public:
-    Sound(Type type, String name);
-    virtual ~Sound() = default;
+    Sound(Type type, int id, String name);
 
-    bool isPlaying() const;
+    constexpr char getId() const { return id; }
+    String getName() const { return name; }
+    Type getType() const { return type; }
+    bool isPlaying() const { return playing; }
+
     void start();
     void stop();
 
-    Type getType() const;
-    String getName() const;
+private:
+    Type type;
+    char id;
+    String name;
+    bool playing;
 };
 
 #endif // SOUND_H

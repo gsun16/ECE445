@@ -1,7 +1,95 @@
 #include "Note.h"
 
-Note::Note(String name, int frequency) : Sound(Sound::Type::NOTE, name), frequency(frequency) {}
+// Constructor
+Note::Note(char id, String name, int octave, Accidental accidental, float frequency)
+    : Sound(Sound::Type::NOTE, id, name), octave(octave), accidental(accidental), frequency(frequency) {}
 
-int Note::getFrequency() const {
-    return frequency;
-}
+// Predefined notes initialization (Note ID using the MIDI notation (from 21 to 108))
+Note Note::A_0  = Note(21, "A",   0, Note::Accidental::NONE, 27.50);
+Note Note::Bb_0 = Note(22, "Bb",  0, Note::Accidental::FLAT, 29.14);
+Note Note::B_0  = Note(23, "B",   0, Note::Accidental::NONE, 30.87);
+Note Note::C_1  = Note(24, "C",   1, Note::Accidental::NONE, 32.70);
+Note Note::Db_1 = Note(25, "Db",  1, Note::Accidental::FLAT, 34.65);
+Note Note::D_1  = Note(26, "D",   1, Note::Accidental::NONE, 36.71);
+Note Note::Eb_1 = Note(27, "Eb",  1, Note::Accidental::FLAT, 38.89);
+Note Note::E_1  = Note(28, "E",   1, Note::Accidental::NONE, 41.20);
+Note Note::F_1  = Note(29, "F",   1, Note::Accidental::NONE, 43.65);
+Note Note::Gb_1 = Note(30, "Gb",  1, Note::Accidental::FLAT, 46.25);
+Note Note::G_1  = Note(31, "G",   1, Note::Accidental::NONE, 49.00);
+Note Note::Ab_1 = Note(32, "Ab",  1, Note::Accidental::FLAT, 51.91);
+Note Note::A_1  = Note(33, "A",   1, Note::Accidental::NONE, 55.00);
+Note Note::Bb_1 = Note(34, "Bb",  1, Note::Accidental::FLAT, 58.27);
+Note Note::B_1  = Note(35, "B",   1, Note::Accidental::NONE, 61.74);
+Note Note::C_2  = Note(36, "C",   2, Note::Accidental::NONE, 65.41);
+Note Note::Db_2 = Note(37, "Db",  2, Note::Accidental::FLAT, 69.30);
+Note Note::D_2  = Note(38, "D",   2, Note::Accidental::NONE, 73.42);
+Note Note::Eb_2 = Note(39, "Eb",  2, Note::Accidental::FLAT, 77.78);
+Note Note::E_2  = Note(40, "E",   2, Note::Accidental::NONE, 82.41);
+Note Note::F_2  = Note(41, "F",   2, Note::Accidental::NONE, 87.31);
+Note Note::Gb_2 = Note(42, "Gb",  2, Note::Accidental::FLAT, 92.50);
+Note Note::G_2  = Note(43, "G",   2, Note::Accidental::NONE, 98.00);
+Note Note::Ab_2 = Note(44, "Ab",  2, Note::Accidental::FLAT, 103.83);
+Note Note::A_2  = Note(45, "A",   2, Note::Accidental::NONE, 110.00);
+Note Note::Bb_2 = Note(46, "Bb",  2, Note::Accidental::FLAT, 116.54);
+Note Note::B_2  = Note(47, "B",   2, Note::Accidental::NONE, 123.47);
+Note Note::C_3  = Note(48, "C",   3, Note::Accidental::NONE, 130.81);
+Note Note::Db_3 = Note(49, "Db",  3, Note::Accidental::FLAT, 138.59);
+Note Note::D_3  = Note(50, "D",   3, Note::Accidental::NONE, 146.83);
+Note Note::Eb_3 = Note(51, "Eb",  3, Note::Accidental::FLAT, 155.56);
+Note Note::E_3  = Note(52, "E",   3, Note::Accidental::NONE, 164.81);
+Note Note::F_3  = Note(53, "F",   3, Note::Accidental::NONE, 174.61);
+Note Note::Gb_3 = Note(54, "Gb",  3, Note::Accidental::FLAT, 185.00);
+Note Note::G_3  = Note(55, "G",   3, Note::Accidental::NONE, 196.00);
+Note Note::Ab_3 = Note(56, "Ab",  3, Note::Accidental::FLAT, 207.65);
+Note Note::A_3  = Note(57, "A",   3, Note::Accidental::NONE, 220.00);
+Note Note::Bb_3 = Note(58, "Bb",  3, Note::Accidental::FLAT, 233.08);
+Note Note::B_3  = Note(59, "B",   3, Note::Accidental::NONE, 246.94);
+Note Note::C_4  = Note(60, "C",   4, Note::Accidental::NONE, 261.63);
+Note Note::Db_4 = Note(61, "Db",  4, Note::Accidental::FLAT, 277.18);
+Note Note::D_4  = Note(62, "D",   4, Note::Accidental::NONE, 293.66);
+Note Note::Eb_4 = Note(63, "Eb",  4, Note::Accidental::FLAT, 311.13);
+Note Note::E_4  = Note(64, "E",   4, Note::Accidental::NONE, 329.63);
+Note Note::F_4  = Note(65, "F",   4, Note::Accidental::NONE, 349.23);
+Note Note::Gb_4 = Note(66, "Gb",  4, Note::Accidental::FLAT, 369.99);
+Note Note::G_4  = Note(67, "G",   4, Note::Accidental::NONE, 392.00);
+Note Note::Ab_4 = Note(68, "Ab",  4, Note::Accidental::FLAT, 415.30);
+Note Note::A_4  = Note(69, "A",   4, Note::Accidental::NONE, 440.00);
+Note Note::Bb_4 = Note(70, "Bb",  4, Note::Accidental::FLAT, 466.16);
+Note Note::B_4  = Note(71, "B",   4, Note::Accidental::NONE, 493.88);
+Note Note::C_5  = Note(72, "C",   5, Note::Accidental::NONE, 523.25);
+Note Note::Db_5 = Note(73, "Db",  5, Note::Accidental::FLAT, 554.37);
+Note Note::D_5  = Note(74, "D",   5, Note::Accidental::NONE, 587.33);
+Note Note::Eb_5 = Note(75, "Eb",  5, Note::Accidental::FLAT, 622.25);
+Note Note::E_5  = Note(76, "E",   5, Note::Accidental::NONE, 659.26);
+Note Note::F_5  = Note(77, "F",   5, Note::Accidental::NONE, 698.46);
+Note Note::Gb_5 = Note(78, "Gb",  5, Note::Accidental::FLAT, 739.99);
+Note Note::G_5  = Note(79, "G",   5, Note::Accidental::NONE, 783.99);
+Note Note::Ab_5 = Note(80, "Ab",  5, Note::Accidental::FLAT, 830.61);
+Note Note::A_5  = Note(81, "A",   5, Note::Accidental::NONE, 880.00);
+Note Note::Bb_5 = Note(82, "Bb",  5, Note::Accidental::FLAT, 932.33);
+Note Note::B_5  = Note(83, "B",   5, Note::Accidental::NONE, 987.77);
+Note Note::C_6  = Note(84, "C",   6, Note::Accidental::NONE, 1046.50);
+Note Note::Db_6 = Note(85, "Db",  6, Note::Accidental::FLAT, 1108.73);
+Note Note::D_6  = Note(86, "D",   6, Note::Accidental::NONE, 1174.66);
+Note Note::Eb_6 = Note(87, "Eb",  6, Note::Accidental::FLAT, 1244.51);
+Note Note::E_6  = Note(88, "E",   6, Note::Accidental::NONE, 1318.51);
+Note Note::F_6  = Note(89, "F",   6, Note::Accidental::NONE, 1396.91);
+Note Note::Gb_6 = Note(90, "Gb",  6, Note::Accidental::FLAT, 1479.98);
+Note Note::G_6  = Note(91, "G",   6, Note::Accidental::NONE, 1567.98);
+Note Note::Ab_6 = Note(92, "Ab",  6, Note::Accidental::FLAT, 1661.22);
+Note Note::A_6  = Note(93, "A",   6, Note::Accidental::NONE, 1760.00);
+Note Note::Bb_6 = Note(94, "Bb",  6, Note::Accidental::FLAT, 1864.66);
+Note Note::B_6  = Note(95, "B",   6, Note::Accidental::NONE, 1975.53);
+Note Note::C_7  = Note(96, "C",   7, Note::Accidental::NONE, 2093.00);
+Note Note::Db_7 = Note(97, "Db",  7, Note::Accidental::FLAT, 2217.46);
+Note Note::D_7  = Note(98, "D",   7, Note::Accidental::NONE, 2349.32);
+Note Note::Eb_7 = Note(99, "Eb",  7, Note::Accidental::FLAT, 2489.02);
+Note Note::E_7  = Note(100, "E",  7, Note::Accidental::NONE, 2637.02);
+Note Note::F_7  = Note(101, "F",  7, Note::Accidental::NONE, 2793.83);
+Note Note::Gb_7 = Note(102, "Gb", 7, Note::Accidental::FLAT, 2959.96);
+Note Note::G_7  = Note(103, "G",  7, Note::Accidental::NONE, 3135.96);
+Note Note::Ab_7 = Note(104, "Ab", 7, Note::Accidental::FLAT, 3322.44);
+Note Note::A_7  = Note(105, "A",  7, Note::Accidental::NONE, 3520.00);
+Note Note::Bb_7 = Note(106, "Bb", 7, Note::Accidental::FLAT, 3729.31);
+Note Note::B_7  = Note(107, "B",  7, Note::Accidental::NONE, 3951.07);
+Note Note::C_8  = Note(108, "C",  8, Note::Accidental::NONE, 4186.01);
