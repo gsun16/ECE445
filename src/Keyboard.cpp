@@ -40,11 +40,15 @@ void Keyboard::update() {
             if (currentState == LOW && !buttonStates[row][col]) {
                 // Button was just pressed
                 buttonStates[row][col] = true;
-                if (keyPressCallback) keyPressCallback(key);
+                if (keyPressCallback) {
+                    keyPressCallback(key);
+                }
             } else if (currentState == HIGH && buttonStates[row][col]) {
                 // Button was just released
                 buttonStates[row][col] = false;
-                if (keyReleaseCallback) keyReleaseCallback(key);
+                if (keyReleaseCallback) {
+                    keyReleaseCallback(key);
+                }
             }
         }
     }
