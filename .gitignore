@@ -1,4 +1,6 @@
 # Ignore system and VSCode files
 .DS_Store
+.pio/
+.pio/*
 .vscode/
 .vscode/*
