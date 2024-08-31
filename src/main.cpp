@@ -4,7 +4,7 @@
 #include "StkAll.h"
 
 // Define constants
-const float AMPLITUDE = 64.0;
+const float AMPLITUDE = 16.0;
 const int GROUP = 0;
 
 // Create instances of the audio components
@@ -21,23 +21,12 @@ int getNote(int key) {
 
 void noteOn(int key) {
     int note = getNote(key);
-
-    Serial.print("Note ");
-    Serial.print(note);
-    Serial.print(" ON at voice ");
-    Serial.println(key);
-
-    voicer.noteOn(note, AMPLITUDE, key);
+    voicer.noteOn(note, AMPLITUDE, GROUP);
 }
 
 void noteOff(int key) {
     int note = getNote(key);
-
-    Serial.print("Note ");
-    Serial.print(note);
-    Serial.print(" OFF at voice ");
-    Serial.println(key);
-    voicer.noteOff(note, AMPLITUDE, key);
+    voicer.noteOff(note, AMPLITUDE, GROUP);
 }
 
 void setup() {
@@ -48,10 +37,8 @@ void setup() {
     keyboard.onKeyPress(noteOn);
     keyboard.onKeyRelease(noteOff);
 
-    // Add the clarinets to the voicer
-    for (int i = 0; i < keyboard.getTotalKeys(); i++) {
-        voicer.addInstrument(&clarinet, i);
-    }
+    // Add the clarinet to the voicer
+    voicer.addInstrument(&clarinet, GROUP);
 
     // Configure the audio output
     auto cfg = i2s.defaultConfig(TX_MODE);
@@ -65,7 +52,8 @@ void setup() {
 }
 
 void loop() {
-    // Update keyboard and process audio
-    keyboard.update();
+  for (int i = 0; i < 512; i++) {
     output.tick(voicer.tick());
+  }
+  keyboard.update();
 }
