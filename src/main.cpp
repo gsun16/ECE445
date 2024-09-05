@@ -16,10 +16,8 @@ Keyboard keyboard;
 
 // Keep track of the voices being used
 struct Voice {
-    int index;
     bool active;
     byte note;
-    float velocity;
     unsigned long lastUsed;
 } voicer[MAX_VOICES];
 
@@ -81,12 +79,11 @@ byte getNote(int key) {
     return (12 * OCTAVE) + 12 + key;
 }
 
-void handleVoice(Voice voice) {
+void handleVoice(Voice voice, int voiceIndex) {
     struct event e = amy.default_event();
     e.midi_note = voice.note;
-    e.velocity = voice.velocity;
-    e.osc = voice.index;
-    strcpy(e.voices, String(voice.index).c_str()); // Convert the int index to char[]
+    e.velocity = voice.active ? 1 : 0;
+    strcpy(e.voices, String(voiceIndex).c_str()); // Convert the int index to char[]
     amy.add_event(e);
 }
 
@@ -95,27 +92,20 @@ void noteOn(int key) {
     if (getOccupiedVoice(note) != -1) {
         return; // This note is being played already, ignore it
     }
-    if (int freeVoice = getFreeVoice(); freeVoice != -1) {
-        voicer[freeVoice].index = freeVoice;
-        voicer[freeVoice].active = true;
-        voicer[freeVoice].note = note;
-        voicer[freeVoice].velocity = 1;
-
-        handleVoice(voicer[freeVoice]);
-
+    if (int freeVoiceIndex = getFreeVoice(); freeVoiceIndex != -1) {
+        voicer[freeVoiceIndex].active = true;
+        voicer[freeVoiceIndex].note = note;
+        handleVoice(voicer[freeVoiceIndex], freeVoiceIndex);
         digitalWrite(LED_PIN, HIGH); // Turn LED ON
     }
 }
 
 void noteOff(int key) {
     byte note = getNote(key);
-    if (int occupiedVoice = getOccupiedVoice(note); occupiedVoice != -1) {
-        voicer[occupiedVoice].active = false;
-        voicer[occupiedVoice].velocity = 0;
-
-        handleVoice(voicer[occupiedVoice]);
+    if (int occupiedVoiceIndex = getOccupiedVoice(note); occupiedVoiceIndex != -1) {
+        voicer[occupiedVoiceIndex].active = false;
+        handleVoice(voicer[occupiedVoiceIndex], occupiedVoiceIndex);
     }
-
     if (!isAnyVoiceActive()) {
         digitalWrite(LED_PIN, LOW); // No voice is active, LED OFF
     }
@@ -196,10 +186,10 @@ void setup() {
                             AMY_FILL_BUFFER_TASK_COREID);
 
     // Reset the oscillators and create the voices with the selected patch
-    amy_reset_oscs();
+    amy.reset();
     struct event e = amy.default_event();
     e.load_patch = 180; // 180: DX7 ACCORDION
-    strcpy(e.voices, "0,1,2,3,4,5,6,7,8,9");
+    strcpy(e.voices, "0,1,2,3,4,5,6,7,8,9"); // Fill the 10 voices with this patch
     amy.add_event(e);
 }
 
