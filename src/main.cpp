@@ -1,6 +1,7 @@
 #include <AMY-Arduino.h>
 #include <ESP_I2S.h>
-#include "Keyboard.h"
+// #include "Keyboard.h"
+#include "ShiftRegisterInKeyboard.h"
 
 #define CONFIG_I2S_BCLK  26
 #define CONFIG_I2S_LRCLK 25
@@ -12,7 +13,8 @@
 
 AMY amy;
 I2SClass I2S;
-Keyboard keyboard;
+// Keyboard keyboard;
+ShiftRegisterInKeyboard keyboard;
 
 // Keep track of the voices being used
 struct Voice {
