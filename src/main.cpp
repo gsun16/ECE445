@@ -85,7 +85,7 @@ void handleVoice(Voice voice, int voiceIndex) {
     struct event e = amy.default_event();
     e.midi_note = voice.note;
     e.velocity = voice.active ? 1 : 0;
-    strcpy(e.voices, String(voiceIndex).c_str()); // Convert the int index to char[]
+    sprintf(e.voices, "%d", voiceIndex); // Convert the int index to char[]
     amy.add_event(e);
 }
 
