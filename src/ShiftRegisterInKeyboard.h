@@ -4,11 +4,14 @@
 #include <Arduino.h>
 
 // Define pins for 74HC165 shift register
-const int LOAD_PIN  = 18; // PL (Parallel Load)
-const int CLOCK_PIN = 14; // CP (Clock Pulse)
-const int DATA_PIN  = 19; // Q7 (Serial Out)
+const int DATA_PIN = 27;
+const int DATA_PIN2 = 26;
+const int CLOCK_PIN = 25;
+const int LOAD_PIN  = 33; // PL (Parallel Load)
 
-const int NUM_KEYS = 8;
+
+
+const int NUM_KEYS = 16;
 
 class ShiftRegisterInKeyboard {
 public:

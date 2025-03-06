@@ -6,10 +6,6 @@ bool buttonStates[ROWS][COLS] = {false};
 Keyboard::Keyboard() : keyPressCallback(nullptr), keyReleaseCallback(nullptr) {}
 
 void Keyboard::begin() {
-    // Set up the row pins as inputs with pull-up resistors
-    for (int i = 0; i < ROWS; i++) {
-        pinMode(rowPins[i], INPUT_PULLUP);
-    }
     // Set up the control pins for the 74HC595
     pinMode(DATA_PIN, OUTPUT);
     pinMode(CLOCK_PIN, OUTPUT);
@@ -29,6 +25,7 @@ void Keyboard::setColumn(int col) {
 }
 
 void Keyboard::update() {
+    /*
     for (int col = 0; col < COLS; col++) {
         // Set the current column to LOW
         setColumn(col);
@@ -52,6 +49,7 @@ void Keyboard::update() {
             }
         }
     }
+    */
 }
 
 void Keyboard::onKeyPress(void (*callback)(int key)) {

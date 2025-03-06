@@ -1,10 +1,9 @@
 #include <AMY-Arduino.h>
 #include <ESP_I2S.h>
-// #include "Keyboard.h"
 #include "ShiftRegisterInKeyboard.h"
 
-#define CONFIG_I2S_BCLK  26
-#define CONFIG_I2S_LRCLK 25
+#define CONFIG_I2S_BCLK  23
+#define CONFIG_I2S_LRCLK 1
 #define CONFIG_I2S_DIN   22
 #define NUM_VOICES        6
 #define LED_PIN           2
@@ -141,7 +140,7 @@ void* esp_fill_audio_buffer_task(void*) {
 
     // Write to i2s
     int16_t* block = amy.fill_buffer();
-    I2S.write((uint8_t*)block, AMY_BLOCK_SIZE * AMY_NCHANS * BYTES_PER_SAMPLE);
+    I2S.write((uint8_t*)block, AMY_BLOCK_SIZE * AMY_NCHANS * AMY_BYTES_PER_SAMPLE);
   }
 }
 
@@ -161,7 +160,7 @@ void setup() {
     I2S.begin(I2S_MODE_STD, AMY_SAMPLE_RATE, I2S_DATA_BIT_WIDTH_16BIT, I2S_SLOT_MODE_MONO);
 
     // Start up AMY
-    amy.begin(/* cores= */ 2, /* reverb= */ 1, /* chorus= */ 1);
+    amy.begin(2,1,1,1);
 
     // We create a mutex for changing the event queue and pointers as two tasks do it at once
     xQueueSemaphore = xSemaphoreCreateMutex();
