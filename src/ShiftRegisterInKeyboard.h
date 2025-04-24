@@ -4,10 +4,20 @@
 #include <Arduino.h>
 
 // Define pins for 74HC165 shift register
+
+
+/*
+//dev
 const int DATA_PIN = 27;
 const int DATA_PIN2 = 26;
 const int CLOCK_PIN = 25;
-const int LOAD_PIN  = 33; // PL (Parallel Load)
+const int LOAD_PIN = 33;
+*/
+//s3
+const int DATA_PIN = 1;
+const int DATA_PIN2 = 2;
+const int CLOCK_PIN = 8;
+const int LOAD_PIN = 7;
 
 
 

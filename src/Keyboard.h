@@ -4,11 +4,21 @@
 #include <Arduino.h>
 
 // Pin definitions for 74HC595
+/*
+//dev
 const int DATA_PIN = 27;
 const int DATA_PIN2 = 26;
 const int CLOCK_PIN = 25;
 const int LATCH_PIN = 33;
 const int NUM_KEYS = 16;
+*/
+//s3
+const int DATA_PIN = 1;
+const int DATA_PIN2 = 2;
+const int CLOCK_PIN = 8;
+const int LATCH_PIN = 7;
+const int NUM_KEYS = 16;
+
 
 // Matrix dimensions
 const int COLS = 1;

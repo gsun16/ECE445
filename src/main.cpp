@@ -1,12 +1,31 @@
 #include <AMY-Arduino.h>
 #include <ESP_I2S.h>
 #include "ShiftRegisterInKeyboard.h"
-
+/*
+//dev
 #define CONFIG_I2S_BCLK  23
 #define CONFIG_I2S_LRCLK 1
 #define CONFIG_I2S_DIN   22
+
+*/
+
+
+/*
+// Pin definitions for 74HC595
+const int DATA_PIN = 27;
+const int DATA_PIN2 = 26;
+const int CLOCK_PIN = 25;
+const int LATCH_PIN = 33;
+const int NUM_KEYS = 16;
+*/
+
+//s3
+#define CONFIG_I2S_BCLK  11
+#define CONFIG_I2S_LRCLK 9
+#define CONFIG_I2S_DIN   10
+
 #define NUM_VOICES        6
-#define LED_PIN           2
+#define LED_PIN           17
 #define OCTAVE            4
 #define MAX_VOICES       16
 #define MAX_NOTES_PER_CHORD 7
@@ -1162,19 +1181,25 @@ void* esp_fill_audio_buffer_task(void*) {
 
 void setup() {
     Serial.begin(115200);
-
+    Serial.println("Starting AMY on ESP32");
     // Initialize the LED status
     pinMode(LED_PIN, OUTPUT);
 
+    digitalWrite(LED_PIN, HIGH); 
+    Serial.println("LED on ");
+
+    Serial.println("Starting keyboard on ESP32");
     // Initialize the keyboard
     keyboard.begin();
     keyboard.onKeyPress(noteOn);
     keyboard.onKeyRelease(noteOff);
 
+    Serial.println("Starting i2s on ESP32");
     // I2S
     I2S.setPins(CONFIG_I2S_BCLK, CONFIG_I2S_LRCLK, CONFIG_I2S_DIN, -1, -1);
     I2S.begin(I2S_MODE_STD, AMY_SAMPLE_RATE, I2S_DATA_BIT_WIDTH_16BIT, I2S_SLOT_MODE_MONO);
 
+    Serial.println("Starting amy on ESP32");
     // Start up AMY
     amy.begin(2,1,1,1);
 
@@ -1212,6 +1237,7 @@ void setup() {
     //delay(1000); // Give time for system to settle
     //playMelody(); // Play once
     delay(1000);
+    Serial.println("Playing chord progression");
     playChordProgression(); // Now play the chord progression
 }
 
