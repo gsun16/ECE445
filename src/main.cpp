@@ -97,18 +97,7 @@ int getOccupiedVoice(byte note) {
 
 byte getNote(int key) {
     // If key == 0 and OCTAVE == 4, then return 60 == C4
-    
-    int myArray[48] = {69, 66, 63, 60, NULL, NULL, NULL, NULL, //nulled functional bottons
-                      81, 78, 75, 72, NULL, NULL, NULL, NULL,
-                      58, 61, 64, 67, 59, 62, 65, 68,
-                      70, 73, 76, 79, 71, 74, 77, 80,
-                      NULL, NULL, NULL, NULL, 75, 70, 65, 60, //nulled chords 
-                      NULL, NULL, NULL, NULL, 55, 50, 45, 40
-    };
-    if (key < 1 || key > 48 || myArray[key - 1] == NULL) {
-        return 0; // Invalid key, return 0
-    }
-    return myArray[key -1];
+    return (12 * OCTAVE) + 12 + key;
 }
 
 void handleVoice(Voice voice, int voiceIndex) {
@@ -1249,7 +1238,7 @@ void setup() {
     //playMelody(); // Play once
     delay(1000);
     Serial.println("Playing chord progression");
-    playChordProgression(); // Now play the chord progression
+    //playChordProgression(); // Now play the chord progression
 }
 
 void loop() {

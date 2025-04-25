@@ -1,4 +1,3 @@
-
 #ifndef KEYBOARD_H
 #define KEYBOARD_H
 
@@ -17,16 +16,12 @@ const int LOAD_PIN = 33;
 //s3
 const int DATA_PIN = 1;
 const int DATA_PIN2 = 2;
-const int DATA_PIN3 = 3;
-const int DATA_PIN4 = 4;
-const int DATA_PIN5 = 5;
-const int DATA_PIN6 = 6;
 const int CLOCK_PIN = 8;
 const int LOAD_PIN = 7;
 
 
 
-const int NUM_KEYS = 48;
+const int NUM_KEYS = 16;
 
 class ShiftRegisterInKeyboard {
 public:
