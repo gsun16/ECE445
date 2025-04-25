@@ -14,14 +14,12 @@ const int CLOCK_PIN = 25;
 const int LOAD_PIN = 33;
 */
 //s3
-const int DATA_PIN = 1;
-const int DATA_PIN2 = 2;
+const int DATA_PINS[6] = {1, 2, 3, 4, 5, 6};
 const int CLOCK_PIN = 8;
 const int LOAD_PIN = 7;
 
 
-
-const int NUM_KEYS = 16;
+const int NUM_KEYS = 48;
 
 class ShiftRegisterInKeyboard {
 public:
