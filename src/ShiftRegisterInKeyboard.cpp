@@ -19,7 +19,7 @@ void ShiftRegisterInKeyboard::begin() {
 
 void ShiftRegisterInKeyboard::update() {
   digitalWrite(LOAD_PIN, LOW);
-  delayMicroseconds(5);
+  delayMicroseconds(1);
   digitalWrite(LOAD_PIN, HIGH);
 
   byte dataBits[6] = {0};
@@ -30,9 +30,9 @@ void ShiftRegisterInKeyboard::update() {
       dataBits[j] = (dataBits[j] << 1) | (bitVal & 1);
     }
     digitalWrite(CLOCK_PIN, HIGH);
-    delayMicroseconds(5);
+    delayMicroseconds(1);
     digitalWrite(CLOCK_PIN, LOW);
-    delayMicroseconds(5);
+    delayMicroseconds(1);
   }
 
   bool currentKeyStates[NUM_KEYS] = {false};
