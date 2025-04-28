@@ -3,9 +3,19 @@
 #include "ShiftRegisterInKeyboard.h"
 
 // s3 config
+/*
 #define CONFIG_I2S_BCLK  11
 #define CONFIG_I2S_LRCLK 9
 #define CONFIG_I2S_DIN   10
+*/
+#define vin 48
+#define gnd 47
+#define CONFIG_I2S_LRCLK 46
+#define CONFIG_I2S_DIN   45
+#define CONFIG_I2S_BCLK  42
+#define CONFIG_I2S_SCK  41
+
+
 
 #define NUM_VOICES        6
 #define LED_PIN           17
@@ -264,6 +274,13 @@ void setup() {
     Serial.begin(115200);
     pinMode(LED_PIN, OUTPUT);
     digitalWrite(LED_PIN, HIGH);
+
+    pinMode(vin, OUTPUT);
+    digitalWrite(vin, HIGH);
+    pinMode(gnd, OUTPUT);
+    digitalWrite(gnd, LOW);
+
+
 
     keyboard.begin();
     keyboard.onKeyPress(noteOn);
